@@ -3,7 +3,7 @@ import pika
 import time
 
 connection = pika.BlockingConnection(pika.ConnectionParameters(
-        host='localhost'))
+        host='192.168.188.23'))
 channel = connection.channel()
 
 channel.queue_declare(queue='hello', durable=False,
