@@ -21,6 +21,8 @@ class DHT22SockerHandler(SocketServer.BaseRequestHandler):
             humidity, temperature = Adafruit_DHT.read_retry(Adafruit_DHT.AM2302, 4)
             try:
                 if humidity is not None and temperature is not None:
+                    humidity = float(format(humidity, '.2f'))
+                    temperature = float(format(temperature, '.2f'))
                     data = json.dumps({"sensor" : "dht22", "humidity" : humidity, "temperature" : temperature})
                     self.request.sendall(data)
 
