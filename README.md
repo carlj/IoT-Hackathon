@@ -24,6 +24,12 @@ There are three different ways to connect to the Raspberry PI:
 **Console Cable**:
 If you want to connect via a Console Cable you need to install the following driver for the **PL2303** USB to TTL Chipset on you local machine: http://www.prolific.com.tw/US/ShowProduct.aspx?pcid=41&showlevel=0041-0041.
 
+Before you can connect to the raspberry make sure that the the ```/boot/config.txt``` has the following entries:
+```
+arm_freq=700
+core_freq=250
+```
+
 On linux and Mac OS X you can run the command ```screen /dev/ttyUSBSerial 115200``` to connect to the Raspberry Pi.
 Within Windows you need to download [Putty](http://www.putty.org). You can find the com port by looking in the Ports section of the Windows Device Manager.
 
@@ -31,16 +37,24 @@ For further information you can check out the tutorial from Adafruit: https://le
 
 If everything up and running you need to enable the i2c ports and install the GPIO Python library.
 
+### Desktop
+By default the Desktop is enable to boot without the desktop just run the following in the terminal:
+```
+sudo raspi-config
+```
+Go to boot options and change to the needed option
+
 ### Enable i2c Ports
 To enable the i2c Ports just running the following commands in the Terminal to install the i2c-tools utility.
 ```
+sudo apt-get update
 sudo apt-get install python-smbus
 sudo apt-get install i2c-tools
 ```
 
 To enable the i2c Interface and Kernel Modul open the raspbian configuration
 ```
-sudo raspi-configre
+sudo raspi-config
 ```
 Go to: ```Advanced Options -> I2C``` and enable the ```ARM I2C Interface``` and the ```I2C Kernel Modul``` by confirming the two questions with yes.
 
@@ -55,7 +69,6 @@ To program the GPIO ports in Python, we need to install a very useful Python 2 l
 
 Run the following commands to install the library:
 ```
-sudo apt-get update
 sudo apt-get install python-dev
 sudo apt-get install python-rpi.gpio
 ```
