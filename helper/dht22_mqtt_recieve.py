@@ -12,15 +12,9 @@ channel.exchange_declare(exchange='iot_logs',
 result = channel.queue_declare(exclusive=True)
 queue_name = result.method.queue
 
-# binding_keys = sys.argv[1:]
-# if not binding_keys:
-#     sys.stderr.write("Usage: %s [binding_key]...\n" % sys.argv[0])
-#     sys.exit(1)
-#
-# for binding_key in binding_keys:
 channel.queue_bind(exchange='iot_logs',
-                   queue=queue_name,
-                   routing_key="test")
+                       queue=queue_name,
+                       routing_key="iot.dht22")
 
 print(' [*] Waiting for logs. To exit press CTRL+C')
 
