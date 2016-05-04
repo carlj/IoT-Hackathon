@@ -8,7 +8,7 @@ This GPS Breakout bord comes directly from Adafruit. You can find the product de
 
 There are only 4 cables needed to connect the GPS Breakout to your Raspberry Pi.
 
-![Wirung](raspberry_pi_UltimateGPS_bb.png)
+![Wiring](raspberry_pi_UltimateGPS_bb.png)
 
 
 ## Installation
