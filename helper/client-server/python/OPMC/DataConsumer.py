@@ -2,7 +2,11 @@ import socket
 import sys
 import time
 
-def start(server_address):
+def start(server_address, callback):
+    if len(server_address) <= 0 or callback is None:
+        print 'cannot start client'
+        return
+
     # Create a UDS socket
     sock = socket.socket(socket.AF_UNIX, socket.SOCK_STREAM)
 
@@ -19,12 +23,20 @@ def start(server_address):
         data = " "
         while len(data) > 0:
             data = sock.recv(4096)
-            print >>sys.stderr, '{1} received {0}'.format(data, time.time())
+            callback(data)
 
     finally:
         print >>sys.stderr, 'closing socket'
         sock.close()
 
-if __name__ == "__main__":
+def printCallback(data):
+    print >>sys.stderr, '{1} received {0}'.format(data, time.time())
 
-    start('./uds_socket')
+if __name__ == '__main__':
+
+    socket_address = './uds_socket'
+
+    if len(sys.argv) == 2:
+        socket_address = sys.argv[1]
+
+    start(socket_address, printCallback)

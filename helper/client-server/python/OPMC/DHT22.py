@@ -1,18 +1,26 @@
 import Adafruit_DHT
-import data_provider
-import os
+import DataProvider
+import sys
 
-def newData():
+def roundFloatData(data):
+    return float(format(data, '.2f'))
+
+def dht22Read():
     humidity, temperature = Adafruit_DHT.read_retry(Adafruit_DHT.AM2302, 4)
 
-    dataDictionary = {'sensor' : 'dht22'}
+    dataDictionary = {'sensor' : 'DHT22'}
     if humidity is not None:
-        dataDictionary['humidity'] = float(format(humidity, '.2f'))
+        dataDictionary['humidity'] = roundFloatData(humidity)
     if temperature is not None:
-        dataDictionary['temperature'] = float(format(temperature, '.2f'))
+        dataDictionary['temperature'] = roundFloatData(temperature)
 
     return dataDictionary
 
-if __name__ == "__main__":
+if __name__ == '__main__':
 
-    data_provider.start(newData, './uds_socket')
+    socket_address = './uds_socket'
+
+    if len(sys.argv) == 2:
+        socket_address = sys.argv[1]
+
+    DataProvider.start(dht22Read, socket_address)

@@ -66,7 +66,7 @@ def start(dataFunction, server_address):
     os.chmod(server_address, 0777)
 
     try:
-        print 'Started Server'
+        print 'Started Server on socker "{0}"'.format(server_address)
         server.serve_forever()
     except KeyboardInterrupt:
         print 'Close Server'
@@ -75,5 +75,5 @@ def start(dataFunction, server_address):
         poller.running = False
         poller.join()
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     start(newData, './uds_socket')
