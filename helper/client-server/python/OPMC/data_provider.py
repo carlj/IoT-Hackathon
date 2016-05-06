@@ -4,6 +4,7 @@ import time
 import sys
 import threading
 import Queue
+import json
 
 queueList = []
 
@@ -13,26 +14,22 @@ class DataPoller(threading.Thread):
     self.dataFunction = dataFunction
     self.running = True #setting the thread running to true
 
-
   def run(self):
     global queueList
     while self.running:
+        if len(queueList) <= 0:
+            time.sleep(0.1)
+            continue
         newData = self.dataFunction()
         for q in queueList:
             q.put(newData)
-        time.sleep(1.)
 
 
 class ThreadingSocketServer(SocketServer.ThreadingMixIn, SocketServer.UnixStreamServer):
-     # Ctrl-C will cleanly kill all spawned threads
     daemon_threads = True
-    # much faster rebinding
     allow_reuse_address = True
 
-    def __init__(self, server_address, RequestHandlerClass):
-        SocketServer.UnixStreamServer.__init__(self, server_address, RequestHandlerClass)
-
-class MySocketHandler(SocketServer.BaseRequestHandler):
+class ConsumerHandler(SocketServer.BaseRequestHandler):
 
     def finish(self):
         global queueList
@@ -47,7 +44,8 @@ class MySocketHandler(SocketServer.BaseRequestHandler):
         while True:
             try:
                 data = self.queue.get()
-                self.request.sendall('{0}'.format(data))
+                jsonData = json.dumps(data)
+                self.request.sendall(jsonData)
                 print '{1}: Sended to client {0.request}. {1}'.format(self, data)
             except Exception as e:
                 print >> sys.stderr, '###\nException: {0} \nFrom Client: {1.request}\n###'.format(e, self)
@@ -56,20 +54,26 @@ class MySocketHandler(SocketServer.BaseRequestHandler):
 def newData():
     return time.time()
 
-if __name__ == "__main__":
+def start(dataFunction, server_address):
+    if dataFunction == None or len(server_address) <= 0:
+        print 'Cannot start server'
+        return
 
-    poller = DataPoller(newData)
+    poller = DataPoller(dataFunction)
     poller.start()
 
-    server_address = './uds_socket'
-    server = ThreadingSocketServer(server_address, MySocketHandler)
+    server = ThreadingSocketServer(server_address, ConsumerHandler)
+    os.chmod(server_address, 0777)
 
     try:
-        print 'Startet Server'
+        print 'Started Server'
         server.serve_forever()
     except KeyboardInterrupt:
-        print 'Need to close Server'
+        print 'Close Server'
         server.server_close()
         os.remove(server_address)
         poller.running = False
         poller.join()
+
+if __name__ == "__main__":
+    start(newData, './uds_socket')
