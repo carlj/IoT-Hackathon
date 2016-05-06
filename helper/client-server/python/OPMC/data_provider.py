@@ -3,23 +3,23 @@ import os
 import time
 import sys
 import threading
+import Queue
 
-sessionData = None #seting the global variable
-
+queueList = []
 
 class DataPoller(threading.Thread):
-  def __init__(self):
+  def __init__(self, dataFunction):
     threading.Thread.__init__(self)
-    global sessionData 
-    sessionData = 0
-
-    self.current_value = None
+    self.dataFunction = dataFunction
     self.running = True #setting the thread running to true
 
+
   def run(self):
-    global sessionData
+    global queueList
     while self.running:
-        sessionData = time.time()
+        newData = self.dataFunction()
+        for q in queueList:
+            q.put(newData)
         time.sleep(1.)
 
 
@@ -34,37 +34,31 @@ class ThreadingSocketServer(SocketServer.ThreadingMixIn, SocketServer.UnixStream
 
 class MySocketHandler(SocketServer.BaseRequestHandler):
 
-    """
-    The RequestHandler class for our server.
-
-    It is instantiated once per connection to the server, and must
-    override the handle() method to implement communication to the
-    client.
-    """
+    def finish(self):
+        global queueList
+        queueList.remove(self.queue)
 
     def handle(self):
-        # self.request is the TCP socket connected to the client
-        # self.data = self.request.recv(4096).strip()
-        # print self.data
-        # print self.client_address[0]
+        global queueList
+        q = Queue.Queue()
+        queueList.append(q)
+        self.queue = q
 
-        # just send back the same data, but upper-cased
-        global sessionData
-        previousData = sessionData
         while True:
             try:
-                if previousData != sessionData:
-                    self.request.sendall('{0}'.format(sessionData))
-                    previousData = sessionData
-                    print '{1}: Sended to client {0.request}. {1}'.format(self, sessionData)
-                time.sleep(0.1)
+                data = self.queue.get()
+                self.request.sendall('{0}'.format(data))
+                print '{1}: Sended to client {0.request}. {1}'.format(self, data)
             except Exception as e:
                 print >> sys.stderr, '###\nException: {0} \nFrom Client: {1.request}\n###'.format(e, self)
                 break
 
+def newData():
+    return time.time()
+
 if __name__ == "__main__":
 
-    poller = DataPoller()
+    poller = DataPoller(newData)
     poller.start()
 
     server_address = './uds_socket'
@@ -77,6 +71,5 @@ if __name__ == "__main__":
         print 'Need to close Server'
         server.server_close()
         os.remove(server_address)
-
         poller.running = False
         poller.join()
