@@ -19,6 +19,8 @@ At first you need to install gps Deamon (gpsd)
 sudo apt-get install gpsd gpsd-clients python-gps
 ```
 
+To get data you can run the gps client cgps with the command ```cpgs -s``` or ```telnet localhost 2947```. If you want to get the raw data from the USB Device directly you can just grep the data from the USB Device itself with the command ```cat /dev/ttyUSB0```.
+
 If you want to manually start and stop the deamon on a local socket you need to stop and disable gpsd service.
 ```
 sudo systemctl stop gpsd.socket
@@ -43,44 +45,12 @@ sudo gpsd /dev/ttyUSB0 -F /var/run/gpsd.sock
 ```
 Note: ```/dev/ttyUSB0```is you USB to TTL adapter. You can find out the name of you adapter by running ```sudo lsusb```. You will have either a ```PL2303``` or ```CP2102``` chipset.
 
-To restart the deamon just kill the deamon on fire up the gpsd again:
+To restart the daemon just kill the daemon on fire up the gpsd again:
 ```
 sudo killall gpsd
 sudo gpsd /dev/ttyUSB0 -F /var/run/gpsd.sock
 ```
 
-## Getting Data
-
-It is fairly easy to read data from the GPS Breakout, because you can get the data from a local TCP Socket:
-import gps
-
-```
-# Listen on port 2947 (gpsd) of localhost
-session = gps.gps("localhost", "2947")
-session.stream(gps.WATCH_ENABLE | gps.WATCH_NEWSTYLE)
-
-while True:
-    try:
-    	report = session.next()
-		# Wait for a 'TPV' report and display the current time
-		# To see all report data, uncomment the line below
-		# print report
-        if report['class'] == 'TPV':
-            if hasattr(report, 'time'):
-                print report.time
-    except KeyError:
-		pass
-    except KeyboardInterrupt:
-		quit()
-    except StopIteration:
-		session = None
-		print "GPSD has terminated"
-```
-
-Note: Check out the ```report``` varibale to get the needed information for your installation.
-
-## Using UART instead of the USB to TTL adapter
-
-We dont recommend to use the UART (Serial Connector) directly, because it isnt possible anymore to login via the console cable. But if you wish to enable the communication between the GPS Breakout and the serial port just following the Adafruit Tutorial (https://learn.adafruit.com/adafruit-ultimate-gps-on-the-raspberry-pi/using-uart-instead-of-usb).
-
 ## Examples
+
+As mentioned above there are three ways (```cgps -s```, ```telnet localhost 2947``` or ```cat /dev/ttyUSB0```) to get the data from the GPS Breakout board. If you want to develop something by yourself you can checkout the python examples in the ```MTK3399/example/``` folder.
