@@ -1,9 +1,9 @@
 ## Getting Data
 
-It is fairly easy to read data from the GPS Breakout, because you can get the data from a local TCP Socket:
+#It is fairly easy to read data from the GPS Breakout, because you can get the data from a local TCP Socket:
 import gps
 
-```
+
 # Listen on port 2947 (gpsd) of localhost
 session = gps.gps("localhost", "2947")
 session.stream(gps.WATCH_ENABLE | gps.WATCH_NEWSTYLE)
@@ -13,10 +13,10 @@ while True:
     	report = session.next()
 		# Wait for a 'TPV' report and display the current time
 		# To see all report data, uncomment the line below
-		# print report
-        if report['class'] == 'TPV':
-            if hasattr(report, 'time'):
-                print report.time
+        print report
+        #if report['class'] == 'TPV':
+        #    if hasattr(report, 'time'):
+        #        print report.time
     except KeyError:
 		pass
     except KeyboardInterrupt:
