@@ -20,17 +20,19 @@ def getAvgDrift(gyro):
         time.sleep(0.02)
 
     print 'getAvgDrift end'
-        
+
     return (
         gyroXAngle / sampleCnt,
         gyroYAngle / sampleCnt,
         gyroZAngle / sampleCnt
     )
 
+def roundFloatData(data):
+    return float(format(data, '.2f'))
 
 if __name__ == '__main__':
 
-    gyro = L3GD20()
+    gyro = L3GD20(L3GD20.L3DS20_RANGE_250DPS)
 
     avgDrift = getAvgDrift(gyro)
 
@@ -47,15 +49,15 @@ if __name__ == '__main__':
         timeDiff = currentTime - lastTime
         lastTime = currentTime
 
-        gyroXAngle += (readout[0] - avgDrift[0]) * gyro.GAIN * (timeDiff / 1000)
-        gyroYAngle += (readout[1] - avgDrift[1]) * gyro.GAIN * (timeDiff / 1000)
-        gyroZAngle += (readout[2] - avgDrift[2]) * gyro.GAIN * (timeDiff / 1000)
+        gyroXAngle = (readout[0] - avgDrift[0]) * gyro.GAIN #* (timeDiff / 1000)
+        gyroYAngle = (readout[1] - avgDrift[1]) * gyro.GAIN #* (timeDiff / 1000)
+        gyroZAngle = (readout[2] - avgDrift[2]) * gyro.GAIN #* (timeDiff / 1000)
 
 
         if (loopCnt > 0 and (loopCnt % 25) == 0):
-            print 'X: ' + str(gyroXAngle) + ' Y: ' + str(gyroYAngle) + ' Z: ' + str(gyroZAngle)
+            print 'X: {0:+.2f} Y: {1:+.2f} Z:{2:+.2f}'.format(roundFloatData(gyroXAngle), roundFloatData(gyroYAngle), roundFloatData(gyroZAngle))
             loopCnt = 0
 
         loopCnt += 1
 
-        time.sleep(0.02)
+        #time.sleep(0.02)
