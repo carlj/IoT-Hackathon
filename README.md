@@ -1,4 +1,4 @@
-re# IoT Raspberry PI Documentation
+# IoT Raspberry PI Documentation
 
 ## Installation
 
