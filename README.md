@@ -26,8 +26,6 @@ If you want to connect via a Console Cable you need to install the following dri
 
 Before you can connect to the raspberry make sure that the the ```/boot/config.txt``` has the following entries:
 ```
-arm_freq=700
-core_freq=250
 dtoverlay=pi3-miniuart-bt
 ```
 
