@@ -28,6 +28,7 @@ Before you can connect to the raspberry make sure that the the ```/boot/config.t
 ```
 arm_freq=700
 core_freq=250
+dtoverlay=pi3-miniuart-bt
 ```
 
 On linux and Mac OS X you can run the command ```screen /dev/ttyUSBSerial 115200``` to connect to the Raspberry Pi.
