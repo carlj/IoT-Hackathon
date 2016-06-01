@@ -6,21 +6,21 @@ connection = pika.BlockingConnection(pika.ConnectionParameters(
         host='192.168.188.24'))
 channel = connection.channel()
 
-channel.exchange_declare(exchange='iot_logs',
+channel.exchange_declare(exchange='iot_hackathon',
                          type='topic')
 
 result = channel.queue_declare(exclusive=True)
 queue_name = result.method.queue
 
-# binding_keys = sys.argv[1:]
-# if not binding_keys:
-#     sys.stderr.write("Usage: %s [binding_key]...\n" % sys.argv[0])
-#     sys.exit(1)
-#
-# for binding_key in binding_keys:
-channel.queue_bind(exchange='iot_logs',
+binding_key = sys.argv[1]
+if not binding_key:
+    sys.stderr.write("Usage: %s [binding_key]...\n" % sys.argv[0])
+    sys.exit(1)
+
+#for binding_key in binding_keys:
+channel.queue_bind(exchange='iot_hackathon',
                    queue=queue_name,
-                   routing_key="test")
+                   routing_key=binding_key)
 
 print(' [*] Waiting for logs. To exit press CTRL+C')
 
