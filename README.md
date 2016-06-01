@@ -95,3 +95,21 @@ There are a few different way's to interact with the sensors.
 ***Remote:***
 * **MQTT**: If you want to request the sensor data from a remote device directly from the Raspberry PI there is a [RabbitMQ](http://www.rabbitmq.com) server that supports [amqp](https://en.wikipedia.org/wiki/Advanced_Message_Queuing_Protocol) up and running. With this service you have the ability to get real time data from the sensors without develop something on the raspberry itself. For further information check out the [AMQP documentation](AMQP.md).
 * **Cloud**: We also push all of the recorded data from all sensors into the cloud. Every second there will be a new record save with all the included data from the sensor and the Raspberry Pi pushes the data to the cloud every 5 up to 60 seconds. For further information check out the [cloud documentation](CLOUD.md).
+
+## Camera
+
+There are few steps needed to use the Raspberry Pi Camera
+
+### Installation
+
+Open the Raspberry Pi configuration with ```sudo raspi-config``` and enable the camera. If you have the v1 version of the camera you are good to go and can skip to the next point. For the [v2](https://www.raspberrypi.org/blog/new-8-megapixel-camera-board-sale-25/) version please continue with the following steps:
+
+* Clone the arm side libraries: ```git clone https://github.com/raspberrypi/userland.git```
+* Install cMake: ```sudo apt-get install cmake```
+* Build the arm source: ```cd userland``` and ```./buildme```
+* Update the kernel: ```sudo rpi-update```
+* Reboot: ```sudo shutdown -r now```
+
+### Using the camera
+
+There are detailed information about the camera usage with [python](https://www.raspberrypi.org/documentation/usage/camera/python/README.md) and [bash](https://www.raspberrypi.org/documentation/usage/camera/raspicam/README.md) on the official raspberry pi website: https://www.raspberrypi.org/help/camera-module-setup/
