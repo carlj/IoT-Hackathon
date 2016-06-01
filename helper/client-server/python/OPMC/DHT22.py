@@ -1,23 +1,26 @@
 import Adafruit_DHT
-import data_provider
+import DataProvider
+import sys
 
-def newData():
-    return "1"
+def roundFloatData(data):
+    return float(format(data, '.2f'))
 
-if __name__ == "__main__":
+def dht22Read():
+    humidity, temperature = Adafruit_DHT.read_retry(Adafruit_DHT.AM2302, 4)
 
-    poller = data_provider.DataPoller(newData)
-    poller.start()
+    dataDictionary = {'sensor' : 'DHT22'}
+    if humidity is not None:
+        dataDictionary['humidity'] = roundFloatData(humidity)
+    if temperature is not None:
+        dataDictionary['temperature'] = roundFloatData(temperature)
 
-    server_address = './uds_socket'
-    server = data_provider.ThreadingSocketServer(server_address, data_provider.MySocketHandler)
+    return dataDictionary
 
-    try:
-        print 'Startet Server'
-        server.serve_forever()
-    except KeyboardInterrupt:
-        print 'Need to close Server'
-        server.server_close()
-        os.remove(server_address)
-        poller.running = False
-        poller.join()
+if __name__ == '__main__':
+
+    socket_address = './uds_socket'
+
+    if len(sys.argv) == 2:
+        socket_address = sys.argv[1]
+
+    DataProvider.start(dht22Read, socket_address)
