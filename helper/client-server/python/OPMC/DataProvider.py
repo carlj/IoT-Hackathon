@@ -52,6 +52,7 @@ class ConsumerHandler(SocketServer.BaseRequestHandler):
                 break
 
 def newData():
+    time.sleep(0.5)
     return time.time()
 
 def start(dataFunction, server_address):

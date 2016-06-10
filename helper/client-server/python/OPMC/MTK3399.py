@@ -23,7 +23,6 @@ class GPSPoller(threading.Thread):
 
 def mtk3399Read():
     global session
-    session.next()
 
     mtk3399Data = {'latitude'  : session.fix.latitude,
                    'longitude' : session.fix.longitude,
