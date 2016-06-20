@@ -2,42 +2,43 @@ import DataConsumer
 import pika
 import sys
 
-mqttIdentifier = None
-channel = None
+class MQTTProvider:
 
-def openConnection(host):
-    connection = pika.BlockingConnection(pika.ConnectionParameters(host=host))
+    def __init__(self, host='localhost', mqttIdentifier='test', socket_address='/tmp/uds_socket'):
+        self.__host = host
+        self.__mqttIdentifier = mqttIdentifier
+        self.__socket = socket_address
 
-    global channel
-    channel = connection.channel()
 
-    channel.exchange_declare(exchange='iot_hackathon',
-                             type='topic')
+    def openConnection(self):
+        self.__connection = pika.BlockingConnection(pika.ConnectionParameters(host=host))
 
-    return connection
+        self.__channel = connection.channel()
 
-def closeConnection(connection):
-    connection.close()
+        channel.exchange_declare(exchange='iot_hackathon',
+                                 type='topic')
 
-def mqttCallback(data):
-    global channel
-    global mqttIdentifier
-    channel.basic_publish(exchange='iot_hackathon',
-                          routing_key=mqttIdentifier,
-                          body=data)
-    print(" [x] Sent %r:%r" % (mqttIdentifier, data))
+    def start(self):
+        DataConsumer.start(self.__socket, self.__mqttCallback)
+
+    def closeConnection(self):
+        self.__connection.close()
+
+    def __mqttCallback(self, data):
+        self.__channel.basic_publish(exchange='iot_hackathon',
+                                    routing_key=self.__mqttIdentifier,
+                                    body=data)
+        #print(" [x] Sent %r:%r" % (mqttIdentifier, data))
 
 if __name__ == '__main__':
 
     socket_address = './uds_socket'
-
-    global mqttIdentifier
-    mqttIdentifier = 'time'
+    mqttIdentifier = 'test'
     if len(sys.argv) == 3:
         socket_address = sys.argv[1]
-
         mqttIdentifier = sys.argv[2]
 
-    connection = openConnection('localhost')
-    DataConsumer.start(socket_address, mqttCallback)
-    closeConnection(connection)
+    mqttProvider = MQTTProvider('localhost', mqttIdentifier, socket_address)
+    mqttProvider.openConnection()
+    mqttProvider.start()
+    mqttProvider.closeConnection()
