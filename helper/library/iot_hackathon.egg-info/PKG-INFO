@@ -1,0 +1,11 @@
+Metadata-Version: 1.1
+Name: iot-hackathon
+Version: 0.0.1
+Summary: This is the sample code for the IoT Hackathon
+Home-page: https://github.com/carlj/IoT-Hackathon
+Author: Carl Jahn
+Author-email: carl.jahn@telekom.de
+License: UNKNOWN
+Description: The samples including the MQTT and Socket code
+Platform: UNKNOWN
+Requires: python (>= 2.7)
