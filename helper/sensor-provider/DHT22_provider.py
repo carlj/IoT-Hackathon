@@ -1,5 +1,5 @@
 import Adafruit_DHT
-import DataProvider from iot-hackathon
+from IoT_Hackathon import DataProvider
 import sys
 
 def roundFloatData(data):
@@ -18,7 +18,7 @@ def dht22Read():
 
 if __name__ == '__main__':
 
-    socket_address = './uds_socket'
+    socket_address = './dht22_socket'
 
     if len(sys.argv) == 2:
         socket_address = sys.argv[1]

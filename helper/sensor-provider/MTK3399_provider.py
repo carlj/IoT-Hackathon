@@ -1,5 +1,5 @@
 import gps
-import DataProvider
+from IoT_Hackathon import DataProvider
 import sys
 import threading
 
@@ -43,7 +43,7 @@ def mtk3399Read():
 if __name__ == '__main__':
 
 
-    socket_address = './uds_socket'
+    socket_address = './mtk3399_socket'
 
     if len(sys.argv) == 2:
         socket_address = sys.argv[1]
