@@ -29,11 +29,12 @@ If everything up and running you need to enable the i2c ports and install the GP
 With the current setup we provided a bunch of sensor's:
 * [DHT22]( https://www.adafruit.com/products/385): The DHT22 is a basic, low-cost **digital temperature** and **humidity sensor**. It uses a capacitive humidity sensor and a thermistor to measure the surrounding air, and spits out a digital signal on the data pin (no analog input pins needed). Its fairly simple to use, but requires careful timing to grab data. The only real **downside of this sensor is you can only get new data from it once every 2 seconds**, so when using our library, sensor readings can be up to 2 seconds old.
 
-* [MTK3339](https://www.adafruit.com/products/746): The MKT3339 is a high-quality **GPS module** that can track up to 22 satellites on 66 channels, has an excellent high-sensitivity receiver (-165 dB tracking!), and a built in antenna. It can do up to 10 location updates a second for high speed, high sensitivity logging or tracking. Power usage is incredibly low, only 20 mA during navigation.
+* [MTK3339](https://www.adafruit.com/products/746): The MKT3339 is a high-quality **GPS module** that can track up to 22 satellites on 66 channels, has an excellent high-sensitivity receiver (-165 dB tracking!), and a built in antenna. It can do up to 10 location updates a second for high speed, high sensitivity logging or tracking. Power usage is incredibly low, only 20 mA during navigation.  
+**Note: The GPS module isnt connected by default to the raspberry pi. To connect the GPS module read the instruction in the [GPS Installation Docu](sensors/MTK3339/README.md)**
 
 * [TSL2561](https://www.adafruit.com/products/439): The TSL2561 **luminosity sensor** is an advanced digital light sensor, ideal for use in a wide range of light situations. Compared to low cost CdS cells, this sensor is more precise, allowing for exact lux calculations and can be configured for different gain/timing ranges to detect light ranges from up to 0.1 - 40,000+ Lux on the fly. The best part of this sensor is that it contains both **infrared and full spectrum diodes**!
 
-* [L3GD20H / LSM303](https://www.adafruit.com/products/1714): This inertial-measurement-unit combines 2 of the best quality sensors available on the market to give you 9 axes of data: **3 axes of accelerometer data, 3 axes gyroscopic, and 3 axes magnetic (compass)**.
+* [L3GD20 / LSM303](https://www.adafruit.com/products/1714): This inertial-measurement-unit combines 2 of the best quality sensors available on the market to give you 9 axes of data: **3 axes of accelerometer data, 3 axes gyroscopic, and 3 axes magnetic (compass)**.
 
 ### Using the Sensor's
 There are a few different way's to interact with the sensors.
@@ -46,16 +47,4 @@ There are a few different way's to interact with the sensors.
 **Note**: For the Remote solution, mentioned below, we are also using the local unix domain socket server. The advantage of this behaviour is that you dont need that start the scripts for every sensor by your self.
 
 ***Remote:***
-* **MQTT**: If you want to request the sensor data from a remote device directly from the Raspberry PI there is a [RabbitMQ](http://www.rabbitmq.com) server that supports [amqp](https://en.wikipedia.org/wiki/Advanced_Message_Queuing_Protocol) up and running. With this service you have the ability to get real time data from the sensors without develop something on the raspberry itself. For further information check out the [AMQP documentation](AMQP.md).
-
-## Camera
-
-There are few steps needed to use the Raspberry Pi Camera
-
-### Installation
-
-Open the Raspberry Pi configuration with ```sudo raspi-config``` and enable the camera. If you have the v1 version of the camera you are good to go and can skip to the next point. For the [v2](https://www.raspberrypi.org/blog/new-8-megapixel-camera-board-sale-25/) version please continue with the following steps:
-
-### Using the camera
-
-There are detailed information about the camera usage with [python](https://www.raspberrypi.org/documentation/usage/camera/python/README.md) and [bash](https://www.raspberrypi.org/documentation/usage/camera/raspicam/README.md) on the official raspberry pi website: https://www.raspberrypi.org/help/camera-module-setup/
+* **MQTT**: If you want to request the sensor data from a remote device directly from the Raspberry PI there is a [RabbitMQ](http://www.rabbitmq.com) server that supports [amqp](https://en.wikipedia.org/wiki/Advanced_Message_Queuing_Protocol) up and running. With this service you have the ability to get real time data from the sensors without develop something on the raspberry itself. For further information check out the [AMQP documentation](AMQP.md). For further Information check out the [MQTT Documentation](mqtt.md)

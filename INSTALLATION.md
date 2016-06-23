@@ -54,3 +54,15 @@ By default the Desktop is enable, to boot without the desktop just run the follo
 sudo raspi-config
 ```
 Go to boot options and change to the needed option and reboot.
+
+## Camera
+
+There are few steps needed to use the Raspberry Pi Camera
+
+### Installation
+
+Open the Raspberry Pi configuration with ```sudo raspi-config``` and enable the camera. If you have the v1 version of the camera you are good to go and can skip to the next point. For the [v2](https://www.raspberrypi.org/blog/new-8-megapixel-camera-board-sale-25/) version please continue with the following steps:
+
+### Using the camera
+
+There are detailed information about the camera usage with [python](https://www.raspberrypi.org/documentation/usage/camera/python/README.md) and [bash](https://www.raspberrypi.org/documentation/usage/camera/raspicam/README.md) on the official raspberry pi website: https://www.raspberrypi.org/help/camera-module-setup/
