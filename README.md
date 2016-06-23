@@ -2,32 +2,18 @@
 
 ## Installation
 
-### Raspbian
-Raspbian is the Foundation’s official supported operating system and the best bet if you want the best hardware support.
-To install Raspbian download the current image from the download page:
-https://www.raspberrypi.org/downloads/raspbian/
+You can find the installation documentation [here](INSTALLATION.md)
 
-**Note**: We are recommend to use the Full Desktop image
-
-After you downloaded the Raspbian image to through the installation guide for you specific plattform:
-* **Linux**: https://www.raspberrypi.org/documentation/installation/installing-images/linux.md
-* **Mac**: https://www.raspberrypi.org/documentation/installation/installing-images/mac.md
-* **Windows**: https://www.raspberrypi.org/documentation/installation/installing-images/windows.md
-
-### Connect
+## Connect
 There are three different ways to connect to the Raspberry PI:
 
 **Graphic**: You can directly connect the Raspberry Pi to a HDMI display, Keyboard and Mouse.
 
-**SSH**: On every raspberry pi there is a ssh server running. To connect to the rasberry pi just try to run the command ```ssh pi@IP-FOR-YOU-RASPBERRY``` or ```ssh pi@NAME-OF-YOUR-RASPBERRY``` e.g. ```ssh pi@iotpi1```. The user is ```pi``` and the password is ```raspberry```.
+**SSH**: On every raspberry pi there is a ssh server running. To connect to the rasberrypi just try to run the command ```ssh pi@IP-FOR-YOU-RASPBERRY``` or ```ssh pi@NAME-OF-YOUR-RASPBERRY``` e.g. ```ssh pi@raspberrypi09```. The user is ```pi``` and the password is ```raspberry```.
 
 **Console Cable**:
 If you want to connect via a Console Cable you need to install the following driver for the **PL2303** USB to TTL Chipset on you local machine: http://www.prolific.com.tw/US/ShowProduct.aspx?pcid=41&showlevel=0041-0041.
 
-Before you can connect to the raspberry make sure that the the ```/config.txt``` has the following entries:
-```
-dtoverlay=pi3-miniuart-bt
-```
 
 You also need to connect the black, green and white cable with the raspberry as shown in the picture:
 ![TTL Connection](https://cdn-learn.adafruit.com/assets/assets/000/003/118/medium800/learn_raspberry_pi_overview.jpg?1396791615)
@@ -39,41 +25,6 @@ For further information you can check out the tutorial from Adafruit: https://le
 
 If everything up and running you need to enable the i2c ports and install the GPIO Python library.
 
-### Desktop
-By default the Desktop is enable to boot without the desktop just run the following in the terminal:
-```
-sudo raspi-config
-```
-Go to boot options and change to the needed option
-
-### Enable i2c Ports
-To enable the i2c Ports just running the following commands in the Terminal to install the i2c-tools utility.
-```
-sudo apt-get update
-sudo apt-get install python-smbus
-sudo apt-get install i2c-tools
-```
-
-To enable the i2c Interface and Kernel Modul open the raspbian configuration
-```
-sudo raspi-config
-```
-Go to: ```Advanced Options -> I2C``` and enable the ```ARM I2C Interface``` and the ```I2C Kernel Modul``` by confirming the two questions with yes.
-
-After you enabled the i2c Interface do a ```sudo shutdown -r now``` to restart the Raspberry PI.
-
-### Testing i2c Ports
-To check everything is working just run the ```sudo i2cdetect -y 1``` command in the terminal.
-If there are some error's just google or check out the [Adafruit Guide](https://learn.adafruit.com/adafruits-raspberry-pi-lesson-4-gpio-setup/configuring-i2c) to enable the i2c ports on the Raspberry PI.
-
-### Install GPIO Support
-To program the GPIO ports in Python, we need to install a very useful Python 2 library called Rpi.GPIO. This module gives us a simple to use Python library that will let us control the GPIO pins.
-
-Run the following commands to install the library:
-```
-sudo apt-get install python-dev
-sudo apt-get install python-rpi.gpio
-```
 ## Sensor's
 With the current setup we provided a bunch of sensor's:
 * [DHT22]( https://www.adafruit.com/products/385): The DHT22 is a basic, low-cost **digital temperature** and **humidity sensor**. It uses a capacitive humidity sensor and a thermistor to measure the surrounding air, and spits out a digital signal on the data pin (no analog input pins needed). Its fairly simple to use, but requires careful timing to grab data. The only real **downside of this sensor is you can only get new data from it once every 2 seconds**, so when using our library, sensor readings can be up to 2 seconds old.
@@ -104,12 +55,6 @@ There are few steps needed to use the Raspberry Pi Camera
 ### Installation
 
 Open the Raspberry Pi configuration with ```sudo raspi-config``` and enable the camera. If you have the v1 version of the camera you are good to go and can skip to the next point. For the [v2](https://www.raspberrypi.org/blog/new-8-megapixel-camera-board-sale-25/) version please continue with the following steps:
-
-* Clone the arm side libraries: ```git clone https://github.com/raspberrypi/userland.git```
-* Install cMake: ```sudo apt-get install cmake```
-* Build the arm source: ```cd userland``` and ```./buildme```
-* Update the kernel: ```sudo rpi-update```
-* Reboot: ```sudo shutdown -r now```
 
 ### Using the camera
 
