@@ -12,60 +12,59 @@ http://ams.com/eng/Products/Light-Sensors/Light-to-Digital-Sensors/TSL25911
 import smbus
 import time
 
+VISIBLE = 2  # channel 0 - channel 1
+INFRARED = 1  # channel 1
+FULLSPECTRUM = 0  # channel 0
+
+ADDR = 0x29
+READBIT = 0x01
+COMMAND_BIT = 0xA0  # bits 7 and 5 for 'command normal'
+CLEAR_BIT = 0x40  # Clears any pending interrupt (write 1 to clear)
+WORD_BIT = 0x20  # 1 = read/write word (rather than byte)
+BLOCK_BIT = 0x10  # 1 = using block read/write
+ENABLE_POWERON = 0x01
+ENABLE_POWEROFF = 0x00
+ENABLE_AEN = 0x02
+ENABLE_AIEN = 0x10
+CONTROL_RESET = 0x80
+LUX_DF = 408.0
+LUX_COEFB = 1.64  # CH0 coefficient
+LUX_COEFC = 0.59  # CH1 coefficient A
+LUX_COEFD = 0.86  # CH2 coefficient B
+
+REGISTER_ENABLE = 0x00
+REGISTER_CONTROL = 0x01
+REGISTER_THRESHHOLDL_LOW = 0x02
+REGISTER_THRESHHOLDL_HIGH = 0x03
+REGISTER_THRESHHOLDH_LOW = 0x04
+REGISTER_THRESHHOLDH_HIGH = 0x05
+REGISTER_INTERRUPT = 0x06
+REGISTER_CRC = 0x08
+REGISTER_ID = 0x0A
+REGISTER_CHAN0_LOW = 0x14
+REGISTER_CHAN0_HIGH = 0x15
+REGISTER_CHAN1_LOW = 0x16
+REGISTER_CHAN1_HIGH = 0x17
+INTEGRATIONTIME_100MS = 0x00
+INTEGRATIONTIME_200MS = 0x01
+INTEGRATIONTIME_300MS = 0x02
+INTEGRATIONTIME_400MS = 0x03
+INTEGRATIONTIME_500MS = 0x04
+INTEGRATIONTIME_600MS = 0x05
+
+GAIN_LOW = 0x00  # low gain (1x)
+GAIN_MED = 0x10  # medium gain (25x)
+GAIN_HIGH = 0x20  # medium gain (428x)
+GAIN_MAX = 0x30  # max gain (9876x)
+
 
 class TSL2591(object):
-
-    VISIBLE = 2  # channel 0 - channel 1
-    INFRARED = 1  # channel 1
-    FULLSPECTRUM = 0  # channel 0
-
-    ADDR = 0x29
-    READBIT = 0x01
-    COMMAND_BIT = 0xA0  # bits 7 and 5 for 'command normal'
-    CLEAR_BIT = 0x40  # Clears any pending interrupt (write 1 to clear)
-    WORD_BIT = 0x20  # 1 = read/write word (rather than byte)
-    BLOCK_BIT = 0x10  # 1 = using block read/write
-    ENABLE_POWERON = 0x01
-    ENABLE_POWEROFF = 0x00
-    ENABLE_AEN = 0x02
-    ENABLE_AIEN = 0x10
-    CONTROL_RESET = 0x80
-    LUX_DF = 408.0
-    LUX_COEFB = 1.64  # CH0 coefficient
-    LUX_COEFC = 0.59  # CH1 coefficient A
-    LUX_COEFD = 0.86  # CH2 coefficient B
-
-    REGISTER_ENABLE = 0x00
-    REGISTER_CONTROL = 0x01
-    REGISTER_THRESHHOLDL_LOW = 0x02
-    REGISTER_THRESHHOLDL_HIGH = 0x03
-    REGISTER_THRESHHOLDH_LOW = 0x04
-    REGISTER_THRESHHOLDH_HIGH = 0x05
-    REGISTER_INTERRUPT = 0x06
-    REGISTER_CRC = 0x08
-    REGISTER_ID = 0x0A
-    REGISTER_CHAN0_LOW = 0x14
-    REGISTER_CHAN0_HIGH = 0x15
-    REGISTER_CHAN1_LOW = 0x16
-    REGISTER_CHAN1_HIGH = 0x17
-    INTEGRATIONTIME_100MS = 0x00
-    INTEGRATIONTIME_200MS = 0x01
-    INTEGRATIONTIME_300MS = 0x02
-    INTEGRATIONTIME_400MS = 0x03
-    INTEGRATIONTIME_500MS = 0x04
-    INTEGRATIONTIME_600MS = 0x05
-
-    GAIN_LOW = 0x00  # low gain (1x)
-    GAIN_MED = 0x10  # medium gain (25x)
-    GAIN_HIGH = 0x20  # medium gain (428x)
-    GAIN_MAX = 0x30  # max gain (9876x)
-
     def __init__(
                  self,
                  i2c_bus=1,
                  sensor_address=0x29,
-                 integration= 0x00, #INTEGRATIONTIME_100MS
-                 gain=0x00 #GAIN_LOW
+                 integration=INTEGRATIONTIME_100MS,
+                 gain=GAIN_LOW
                  ):
         self.bus = smbus.SMBus(i2c_bus)
         self.sendor_address = sensor_address
@@ -80,7 +79,7 @@ class TSL2591(object):
         self.integration_time = integration
         self.bus.write_byte_data(
                     self.sendor_address,
-                    TSL2591.COMMAND_BIT | TSL2591.REGISTER_CONTROL,
+                    COMMAND_BIT | REGISTER_CONTROL,
                     self.integration_time | self.gain
                     )
         self.disable()
@@ -93,7 +92,7 @@ class TSL2591(object):
         self.gain = gain
         self.bus.write_byte_data(
                     self.sendor_address,
-                    TSL2591.COMMAND_BIT | TSL2591.REGISTER_CONTROL,
+                    COMMAND_BIT | REGISTER_CONTROL,
                     self.integration_time | self.gain
                     )
         self.disable()
@@ -107,12 +106,12 @@ class TSL2591(object):
             return 0
 
         case_integ = {
-            TSL2591.INTEGRATIONTIME_100MS: 100.,
-            TSL2591.INTEGRATIONTIME_200MS: 200.,
-            TSL2591.INTEGRATIONTIME_300MS: 300.,
-            TSL2591.INTEGRATIONTIME_400MS: 400.,
-            TSL2591.INTEGRATIONTIME_500MS: 500.,
-            TSL2591.INTEGRATIONTIME_600MS: 600.,
+            INTEGRATIONTIME_100MS: 100.,
+            INTEGRATIONTIME_200MS: 200.,
+            INTEGRATIONTIME_300MS: 300.,
+            INTEGRATIONTIME_400MS: 400.,
+            INTEGRATIONTIME_500MS: 500.,
+            INTEGRATIONTIME_600MS: 600.,
             }
         if self.integration_time in case_integ.keys():
             atime = case_integ[self.integration_time]
@@ -120,10 +119,10 @@ class TSL2591(object):
             atime = 100.
 
         case_gain = {
-            TSL2591.GAIN_LOW: 1.,
-            TSL2591.GAIN_MED: 25.,
-            TSL2591.GAIN_HIGH: 428.,
-            TSL2591.GAIN_MAX: 9876.,
+            GAIN_LOW: 1.,
+            GAIN_MED: 25.,
+            GAIN_HIGH: 428.,
+            GAIN_MAX: 9876.,
             }
 
         if self.gain in case_gain.keys():
@@ -132,10 +131,10 @@ class TSL2591(object):
             again = 1.
 
         # cpl = (ATIME * AGAIN) / DF
-        cpl = (atime * again) / TSL2591.LUX_DF
-        lux1 = (full - (TSL2591.LUX_COEFB * ir)) / cpl
+        cpl = (atime * again) / LUX_DF
+        lux1 = (full - (LUX_COEFB * ir)) / cpl
 
-        lux2 = ((TSL2591.LUX_COEFC * full) - (TSL2591.LUX_COEFD * ir)) / cpl
+        lux2 = ((LUX_COEFC * full) - (LUX_COEFD * ir)) / cpl
 
         # The highest value is the approximate lux equivalent
         return max([lux1, lux2])
@@ -143,25 +142,25 @@ class TSL2591(object):
     def enable(self):
         self.bus.write_byte_data(
                     self.sendor_address,
-                    TSL2591.COMMAND_BIT | TSL2591.REGISTER_ENABLE,
-                    TSL2591.ENABLE_POWERON | TSL2591.ENABLE_AEN | TSL2591.ENABLE_AIEN
+                    COMMAND_BIT | REGISTER_ENABLE,
+                    ENABLE_POWERON | ENABLE_AEN | ENABLE_AIEN
                     )  # Enable
 
     def disable(self):
         self.bus.write_byte_data(
                     self.sendor_address,
-                    TSL2591.COMMAND_BIT | TSL2591.REGISTER_ENABLE,
-                    TSL2591.ENABLE_POWEROFF
+                    COMMAND_BIT | REGISTER_ENABLE,
+                    ENABLE_POWEROFF
                     )
 
     def get_full_luminosity(self):
         self.enable()
         time.sleep(0.120*self.integration_time+1)  # not sure if we need it "// Wait x ms for ADC to complete"
         full = self.bus.read_word_data(
-                    self.sendor_address, TSL2591.COMMAND_BIT | TSL2591.REGISTER_CHAN0_LOW
+                    self.sendor_address, COMMAND_BIT | REGISTER_CHAN0_LOW
                     )
         ir = self.bus.read_word_data(
-                    self.sendor_address, TSL2591.COMMAND_BIT | TSL2591.REGISTER_CHAN1_LOW
+                    self.sendor_address, COMMAND_BIT | REGISTER_CHAN1_LOW
                     )
         self.disable()
         return full, ir
@@ -183,7 +182,7 @@ class TSL2591(object):
 
 if __name__ == '__main__':
 
-    tsl = TSL2591()  # initialize
+    tsl = Tsl2591()  # initialize
 
     full, ir = tsl.get_full_luminosity()  # read raw values (full spectrum and ir spectrum)
     lux = tsl.calculate_lux(full, ir)  # convert raw values to lux
@@ -192,7 +191,7 @@ if __name__ == '__main__':
 
 
 
-    def test(int_time=TSL2591.INTEGRATIONTIME_100MS, gain=TSL2591.GAIN_LOW):
+    def test(int_time=INTEGRATIONTIME_100MS, gain=GAIN_LOW):
         tsl.set_gain(gain)
         tsl.set_timing(int_time)
         full_test, ir_test = tsl.get_full_luminosity()
