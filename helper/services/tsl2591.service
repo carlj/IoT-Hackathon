@@ -1,9 +1,9 @@
 [Unit]
-Description=dht22
+Description=tsl2591
 
 [Service]
 TimeoutStartSec=0
-ExecStart=/usr/bin/python /home/pi/pi/helper/sensor-socket/DHT22_socket.py
+ExecStart=/usr/bin/python /home/pi/pi/helper/sensor-socket/TSL2591_socket.py
 Restart=on-failure
 
 [Install]
