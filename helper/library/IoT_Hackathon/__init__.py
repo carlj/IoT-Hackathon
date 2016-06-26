@@ -1,1 +1,3 @@
-__all__ = ['DataConsumer', 'DataProvider', 'MQTTProvider', 'MQTTReciever']
+__all__ = ['DataConsumer', 'DataProvider', 'MQTTProvider']
+
+from MQTTReciever import MQTTReciever

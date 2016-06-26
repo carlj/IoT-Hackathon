@@ -18,7 +18,7 @@ def dht22Read():
 
 if __name__ == '__main__':
 
-    socket_address = './dht22_socket'
+    socket_address = '/tmp/dht22'
 
     if len(sys.argv) == 2:
         socket_address = sys.argv[1]

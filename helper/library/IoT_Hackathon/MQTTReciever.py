@@ -40,4 +40,4 @@ if __name__ == '__main__':
         print 'Key: {0} body {1}'.format(key, body)
 
     recieve = MQTTReciever('localhost', '#', callback)
-    revieve.openConnection()
+    recieve.openConnection()

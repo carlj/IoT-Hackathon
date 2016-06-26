@@ -58,7 +58,7 @@ if __name__ == '__main__':
     global lastTime
     lastTime = time.time() * 1000
 
-    socket_address = './l3gd20_socket'
+    socket_address = '/tmp/l3gd20'
 
     if len(sys.argv) == 2:
         socket_address = sys.argv[1]

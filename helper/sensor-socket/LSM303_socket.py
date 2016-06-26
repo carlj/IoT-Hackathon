@@ -23,7 +23,7 @@ if __name__ == '__main__':
 
     lsm303 = Adafruit_LSM303.LSM303()
 
-    socket_address = './lsm303_socket'
+    socket_address = '/tmp/lsm303'
 
     if len(sys.argv) == 2:
         socket_address = sys.argv[1]

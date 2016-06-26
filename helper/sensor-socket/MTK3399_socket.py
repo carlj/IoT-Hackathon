@@ -43,7 +43,7 @@ def mtk3399Read():
 if __name__ == '__main__':
 
 
-    socket_address = './mtk3399_socket'
+    socket_address = '/tmp/mtk3399'
 
     if len(sys.argv) == 2:
         socket_address = sys.argv[1]
