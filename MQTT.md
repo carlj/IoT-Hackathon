@@ -7,7 +7,7 @@ To check out the status, restart or stop the mqtt service just use the service c
 
 ## Connect
 The MQTT Server is listening on the port ```5672```.
-In the ```iot-hackathon/helper/mqtt-reciever``` folder are scripts for each sensor to recieve the messages.
+There are a examples to recieve data from the sensors in the ```/home/pi/IoT-Hackathon/helper/sensor-mqtt-reciever``` folder.
 
 The default exchange name is ```iot_hackathon``` and you can use the name of the sensor as the routingkey (e.g. "dht22", "tsl2591")
 
@@ -40,8 +40,7 @@ channel.basic_consume(callback,
 channel.start_consuming()
 ```
 
-
-## Exchange and Message Queues
+## Exchange and Topics/Routing Keys
 * Default Exchange: ```iot-hackathon```
 * Topics:
   * ```dht22``
