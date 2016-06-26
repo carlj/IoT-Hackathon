@@ -60,6 +60,8 @@ def start(dataFunction, server_address):
         print 'Cannot start server'
         return
 
+    os.remove(server_address)
+
     poller = DataPoller(dataFunction)
     poller.start()
 
@@ -69,7 +71,7 @@ def start(dataFunction, server_address):
     try:
         print 'Started Server on socker "{0}"'.format(server_address)
         server.serve_forever()
-    except KeyboardInterrupt:
+    except Exception as e:
         print 'Close Server'
         server.server_close()
         os.remove(server_address)
