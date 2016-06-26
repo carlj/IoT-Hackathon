@@ -1,0 +1,12 @@
+[Unit]
+Description=mtk3339-mqtt
+Requires=mtk3339.service
+After=mtk3339.service
+
+[Service]
+TimeoutStartSec=0
+ExecStart=/usr/bin/python /home/pi/pi/helper/sensor-mqtt/mqtt_provide.py localhost mtk3339 /tmp/mtk3339
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target

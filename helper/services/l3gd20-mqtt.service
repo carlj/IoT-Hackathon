@@ -1,0 +1,12 @@
+[Unit]
+Description=l3gd20-mqtt
+Requires=l3gd20.service
+After=l3gd20.service
+
+[Service]
+TimeoutStartSec=0
+ExecStart=/usr/bin/python /home/pi/pi/helper/sensor-mqtt/mqtt_provide.py localhost l3gd20 /tmp/l3gd20
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target

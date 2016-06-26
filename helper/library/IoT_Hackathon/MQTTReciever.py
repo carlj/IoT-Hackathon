@@ -8,7 +8,7 @@ class MQTTReciever:
         self.__routingKey = routing_key
         self.__callback = callback
 
-    def __internalCallback(ch, method, properties, body):
+    def __internalCallback(self, ch, method, properties, body):
         if self.__callback:
             self.__callback(method.routing_key, body)
 

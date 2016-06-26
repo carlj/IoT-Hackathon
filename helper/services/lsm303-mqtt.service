@@ -1,0 +1,12 @@
+[Unit]
+Description=lsm303-mqtt
+Requires=lsm303.service
+After=lsm303.service
+
+[Service]
+TimeoutStartSec=0
+ExecStart=/usr/bin/python /home/pi/pi/helper/sensor-mqtt/mqtt_provide.py localhost lsm303 /tmp/lsm303
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target

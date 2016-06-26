@@ -1,0 +1,12 @@
+[Unit]
+Description=tsl2591-mqtt
+Requires=tsl2591.service
+After=tsl2591.service
+
+[Service]
+TimeoutStartSec=0
+ExecStart=/usr/bin/python /home/pi/pi/helper/sensor-mqtt/mqtt_provide.py localhost tsl2591 /tmp/tsl2591
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target

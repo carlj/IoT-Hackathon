@@ -1,0 +1,12 @@
+[Unit]
+Description=dht22-mqtt
+Requires=dht22.service
+After=dht22.service
+
+[Service]
+TimeoutStartSec=0
+ExecStart=/usr/bin/python /home/pi/pi/helper/sensor-mqtt/mqtt_provide.py localhost dht22 /tmp/dht22
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target

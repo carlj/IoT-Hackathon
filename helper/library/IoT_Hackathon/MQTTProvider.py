@@ -11,11 +11,11 @@ class MQTTProvider:
 
 
     def openConnection(self):
-        self.__connection = pika.BlockingConnection(pika.ConnectionParameters(host=host))
+        self.__connection = pika.BlockingConnection(pika.ConnectionParameters(host=self.__host))
 
-        self.__channel = connection.channel()
+        self.__channel = self.__connection.channel()
 
-        channel.exchange_declare(exchange='iot_hackathon',
+        self.__channel.exchange_declare(exchange='iot_hackathon',
                                  type='topic')
 
     def start(self):

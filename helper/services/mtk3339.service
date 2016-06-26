@@ -1,0 +1,10 @@
+[Unit]
+Description=mtk3339
+
+[Service]
+TimeoutStartSec=0
+ExecStart=/usr/bin/python /home/pi/pi/helper/sensor-socket/MTK3339_socket.py
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
