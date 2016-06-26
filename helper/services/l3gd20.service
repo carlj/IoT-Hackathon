@@ -3,7 +3,7 @@ Description=l3gd20
 
 [Service]
 TimeoutStartSec=0
-ExecStart=/usr/bin/python /home/pi/pi/helper/sensor-socket/L3GD20_socket.py
+ExecStart=/usr/bin/python /home/pi/IoT-Hackathon/helper/sensor-socket/L3GD20_socket.py
 Restart=on-failure
 
 [Install]

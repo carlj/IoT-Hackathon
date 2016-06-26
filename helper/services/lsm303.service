@@ -3,7 +3,7 @@ Description=lsm303
 
 [Service]
 TimeoutStartSec=0
-ExecStart=/usr/bin/python /home/pi/pi/helper/sensor-socket/LSM303_socket.py
+ExecStart=/usr/bin/python /home/pi/IoT-Hackathon/helper/sensor-socket/LSM303_socket.py
 Restart=on-failure
 
 [Install]
