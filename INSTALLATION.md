@@ -51,6 +51,8 @@ network={
 ### Install all of the needed sources
 To install all of the needed sources, libraries and package just execute the ```install.sh``` script in the root directory of the git repo.
 ```
+git clone https://github.com/carlj/IoT-Hackathon.git
+cd IoT-Hackathon
 sudo ./install.sh
 ```
 
