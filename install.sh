@@ -23,7 +23,9 @@ sudo rabbitmqctl set_policy TTL ".*" '{"message-ttl":5000}' --apply-to queues
 sudo ./sensors/install-sensors.sh
 
 # Install the Helper Library
-sudo ./helper/install-library.sh
+sudo ./helper/library/install-library.sh
+
+# Install the Services
 sudo ./helper/services/install-services.sh
 
 # Reboot
