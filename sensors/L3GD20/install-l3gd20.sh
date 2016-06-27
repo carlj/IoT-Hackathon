@@ -2,7 +2,7 @@
 cd "$(dirname "$0")"
 
 # Install the GPIO dependencies
-sudo pip install Adafruit-GPIO
+sudo pip install --yes Adafruit-GPIO
 
 # Go to the right folder
 cd ./source/Adafruit-Raspberry-Pi-Python-Code-master
