@@ -31,8 +31,8 @@ sudo raspi-config
 For a basic configuration you need to set the following options:
 * [1] Expand Filesystem: Yes
 * [6] Enable Camera: Enable
-* [9] Advanced Options -> [A2] Hostname: ```raspberrypiXX``` (e.g.) ```raspberrypi09```
-* [9] Advanced Options -> [A6] I2C: Enable the ```ARM I2C Interface``` and the ```I2C Kernel Modul```
+* [9] Advanced Options -> [A2] Hostname: ```raspberrypiX``` (e.g.) ```raspberrypi9```
+* [9] Advanced Options -> [A6] I2C: Enable
 * [9] Advanced Options -> [AA] 1-Wire: Enable
 
 After the configuration the is a reboot needed: ```sudo shutdown -r now```.
@@ -60,6 +60,8 @@ sudo ./install.sh
 To check everything is working just run the ```sudo i2cdetect -y 1``` command in the terminal.
 If there are some error's just google or check out the [Adafruit Guide](https://learn.adafruit.com/adafruits-raspberry-pi-lesson-4-gpio-setup/configuring-i2c) to enable the i2c ports on the Raspberry PI.
 
+To test if all sensors are working just execute the script:
+```sudo python ~/IoT-Hackathon/helper/sensor-test/sensor-test.py```
 
 ### Desktop
 By default the Desktop is enable, to boot without the desktop just run the following in the terminal:
