@@ -5,6 +5,6 @@ cd "$(dirname "$0")"
 cd ./source/Adafruit_Python_DHT-master
 
 sudo apt-get update
-sudo apt-get install build-essential python-dev python-openssl
+sudo apt-get install --yes build-essential python-dev python-openssl
 
 sudo python setup.py install
