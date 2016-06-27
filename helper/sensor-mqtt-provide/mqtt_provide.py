@@ -10,7 +10,9 @@ if __name__ == '__main__':
         host = sys.argv[1]
         topic = sys.argv[2]
         socket = sys.argv[3]
-
+    else:
+        print "you need to provide the host, topic and socket (e.g. 'sudo python mqtt_provide.py localhost dht22 /tmp/dht22')"
+    
     mqttProvider = MQTTProvider(host, topic, socket)
     mqttProvider.openConnection()
     mqttProvider.start()

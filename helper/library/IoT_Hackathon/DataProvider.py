@@ -60,7 +60,8 @@ def start(dataFunction, server_address):
         print 'Cannot start server'
         return
 
-    os.remove(server_address)
+    if os.path.exists(server_address):
+        os.remove(server_address)
 
     poller = DataPoller(dataFunction)
     poller.start()
