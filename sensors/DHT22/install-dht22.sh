@@ -1,4 +1,5 @@
 #!/bin/bash
+cd "$(dirname "$0")"
 
 #git clone https://github.com/adafruit/Adafruit_Python_DHT.git
 cd ./source/Adafruit_Python_DHT-master
