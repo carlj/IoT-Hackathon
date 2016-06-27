@@ -20,11 +20,11 @@ sudo cp ./helper/rabbitmq/rabbitmq.config /etc/rabbitmq/rabbitmq.config
 sudo rabbitmqctl set_policy TTL ".*" '{"message-ttl":5000}' --apply-to queues
 
 # Install the Sensor Libraries
-sudo ./sensors/install.sh
+sudo ./sensors/install-sensors.sh
 
 # Install the Helper Library
-sudo ./helper/install.sh
-sudo ./helper/services/install.sh
+sudo ./helper/install-library.sh
+sudo ./helper/services/install-services.sh
 
 # Reboot
 echo "Please reboot with: 'sudo shutdown -r now'"
