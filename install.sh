@@ -14,14 +14,13 @@ echo 'deb http://www.rabbitmq.com/debian/ testing main' | sudo tee /etc/apt/sour
 wget -O- https://www.rabbitmq.com/rabbitmq-release-signing-key.asc | sudo apt-key add -
 sudo apt-get install rabbitmq-server
 
+sudo cp ./helper/rabbitmq/rabbitmq.config /etc/rabbitmq/rabbitmq.config 
+
 # Install the Sensor Libraries
 sudo ./sensors/install.sh
 
 # Install the Helper Library
 sudo ./helper/install.sh
-
-# Install Services
-
 
 # Reboot
 echo "Please reboot with: 'sudo shutdown -r now'"

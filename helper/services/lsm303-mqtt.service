@@ -5,7 +5,7 @@ After=lsm303.service
 
 [Service]
 TimeoutStartSec=0
-ExecStart=/usr/bin/python /home/pi/IoT-Hackathon/helper/sensor-mqtt/mqtt_provide.py localhost lsm303 /tmp/lsm303
+ExecStart=/usr/bin/python /home/pi/IoT-Hackathon/helper/sensor-mqtt-provide/mqtt_provide.py localhost lsm303 /tmp/lsm303
 Restart=on-failure
 
 [Install]

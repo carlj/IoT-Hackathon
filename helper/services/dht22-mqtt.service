@@ -5,7 +5,7 @@ After=dht22.service
 
 [Service]
 TimeoutStartSec=0
-ExecStart=/usr/bin/python /home/pi/IoT-Hackathon/helper/sensor-mqtt/mqtt_provide.py localhost dht22 /tmp/dht22
+ExecStart=/usr/bin/python /home/pi/IoT-Hackathon/helper/sensor-mqtt-provide/mqtt_provide.py localhost dht22 /tmp/dht22
 Restart=on-failure
 
 [Install]

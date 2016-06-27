@@ -3,7 +3,7 @@ Description=tsl2591
 
 [Service]
 TimeoutStartSec=0
-ExecStart=/usr/bin/python /home/pi/IoT-Hackathon/helper/sensor-socket/TSL2591_socket.py
+ExecStart=/usr/bin/python /home/pi/IoT-Hackathon/helper/sensor-socket-provide/TSL2591_socket.py
 Restart=on-failure
 
 [Install]

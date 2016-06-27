@@ -5,7 +5,7 @@ After=mtk3339.service
 
 [Service]
 TimeoutStartSec=0
-ExecStart=/usr/bin/python /home/pi/IoT-Hackathon/helper/sensor-mqtt/mqtt_provide.py localhost mtk3339 /tmp/mtk3339
+ExecStart=/usr/bin/python /home/pi/IoT-Hackathon/helper/sensor-mqtt-provide/mqtt_provide.py localhost mtk3339 /tmp/mtk3339
 Restart=on-failure
 
 [Install]

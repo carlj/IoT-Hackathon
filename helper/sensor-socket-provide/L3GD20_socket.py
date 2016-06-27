@@ -32,12 +32,15 @@ lastTime = None
 
 def l3gd20read():
 
+    global gyro
     readout = gyro.read()
 
+    global lastTime
     currentTime = time.time() * 1000
     timeDiff = currentTime - lastTime
     lastTime = currentTime
 
+    global avgDrift
     gyroXAngle = (readout[0] - avgDrift[0]) * gyro.GAIN #* (timeDiff / 1000)
     gyroYAngle = (readout[1] - avgDrift[1]) * gyro.GAIN #* (timeDiff / 1000)
     gyroZAngle = (readout[2] - avgDrift[2]) * gyro.GAIN #* (timeDiff / 1000)
@@ -46,6 +49,8 @@ def l3gd20read():
                       'xAngle' : gyroXAngle,
                       'yAngle' : gyroYAngle,
                       'zAngle' : gyroZAngle}
+
+    return dataDictionary
 
 if __name__ == '__main__':
 
