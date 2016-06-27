@@ -19,6 +19,8 @@ def lsm303read():
                       'yMagnitude' : mag_y,
                       'zMagnitude' : mag_z}
 
+    return dataDictionary
+
 if __name__ == '__main__':
 
     lsm303 = Adafruit_LSM303.LSM303()

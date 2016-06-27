@@ -21,10 +21,10 @@ class GPSPoller(threading.Thread):
       session.next() #this will continue to loop and grab EACH set of gpsd info to clear the buffer
 
 
-def mtk3399Read():
+def mtk3339Read():
     global session
 
-    mtk3399Data = {'latitude'  : session.fix.latitude,
+    mtk3339Data = {'latitude'  : session.fix.latitude,
                    'longitude' : session.fix.longitude,
                    'utc'       : session.utc,
                    'altitude'  : session.fix.altitude,
@@ -37,20 +37,20 @@ def mtk3399Read():
                    'track'     : session.fix.track,
                    'mode'      : session.fix.mode}
 
-    return mtk3399Data
+    return mtk3339Data
 
 
 if __name__ == '__main__':
 
 
-    socket_address = '/tmp/mtk3399'
+    socket_address = '/tmp/mtk3339'
 
     if len(sys.argv) == 2:
         socket_address = sys.argv[1]
 
     gpsp = GPSPoller()
     gpsp.start()
-    DataProvider.start(mtk3399Read, socket_address)
+    DataProvider.start(mtk3339Read, socket_address)
 
     gpsp.running = False
     gpsp.join()

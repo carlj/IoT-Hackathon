@@ -16,6 +16,7 @@ def tsl2591read():
                       'fullspectrum' : full,
                       'irspectrum' : ir}
 
+    return dataDictionary
 
 if __name__ == '__main__':
 
