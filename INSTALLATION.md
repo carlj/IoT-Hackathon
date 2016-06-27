@@ -37,6 +37,17 @@ For a basic configuration you need to set the following options:
 
 After the configuration the is a reboot needed: ```sudo shutdown -r now```.
 
+### WLAN
+To setup the wlan just copy and paste the following to the ```/etc/wpa_supplicant/wpa_supplicant.conf```:
+```
+country=GB ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev 
+update_config=1
+network={
+        ssid="IoT-Hackathon"
+        psk="Himbeerkuchen"
+}
+```
+
 ### Install all of the needed sources
 To install all of the needed sources, libraries and package just execute the ```install.sh``` script in the root directory of the git repo.
 ```
