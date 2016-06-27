@@ -16,6 +16,8 @@ sudo apt-get install rabbitmq-server
 
 sudo cp ./helper/rabbitmq/rabbitmq.config /etc/rabbitmq/rabbitmq.config 
 
+sudo rabbitmqctl set_policy TTL ".*" '{"message-ttl":5000}' --apply-to queues
+
 # Install the Sensor Libraries
 sudo ./sensors/install.sh
 
