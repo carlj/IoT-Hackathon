@@ -46,7 +46,7 @@ class ConsumerHandler(SocketServer.BaseRequestHandler):
                 data = self.queue.get()
                 jsonData = json.dumps(data)
                 self.request.sendall(jsonData)
-                print '{1}: Sended to client {0.request}. {1}'.format(self, data)
+                #print '{1}: Sended to client {0.request}. {1}'.format(self, data)
             except Exception as e:
                 print >> sys.stderr, '###\nException: {0} \nFrom Client: {1.request}\n###'.format(e, self)
                 break
