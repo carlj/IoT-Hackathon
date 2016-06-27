@@ -39,10 +39,6 @@ If you want to run the service manually you need to start the deamon with the US
 sudo gpsd /dev/ttyUSB0 -F /var/run/gpsd.sock
 ```
 
-The manually started deamon will be running until the next reboot or you shutdown the deamon by typping:
-```
-sudo gpsd /dev/ttyUSB0 -F /var/run/gpsd.sock
-```
 Note: ```/dev/ttyUSB0```is you USB to TTL adapter. You can find out the name of you adapter by running ```sudo lsusb```. You will have either a ```PL2303``` or ```CP2102``` chipset.
 
 To restart the daemon just kill the daemon on fire up the gpsd again:
