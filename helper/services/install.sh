@@ -1,4 +1,5 @@
 #!/bin/bash
+cd "$(dirname "$0")"
 
 # Install DHT22 Service
 sudo cp dht22.service /etc/systemd/system/dht22.service

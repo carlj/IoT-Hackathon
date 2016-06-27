@@ -1,4 +1,5 @@
 #!/bin/bash
+cd "$(dirname "$0")"
 
 # Install I2C needed packages
 sudo apt-get update
@@ -14,7 +15,7 @@ echo 'deb http://www.rabbitmq.com/debian/ testing main' | sudo tee /etc/apt/sour
 wget -O- https://www.rabbitmq.com/rabbitmq-release-signing-key.asc | sudo apt-key add -
 sudo apt-get install rabbitmq-server
 
-sudo cp ./helper/rabbitmq/rabbitmq.config /etc/rabbitmq/rabbitmq.config 
+sudo cp ./helper/rabbitmq/rabbitmq.config /etc/rabbitmq/rabbitmq.config
 
 sudo rabbitmqctl set_policy TTL ".*" '{"message-ttl":5000}' --apply-to queues
 
@@ -23,6 +24,7 @@ sudo ./sensors/install.sh
 
 # Install the Helper Library
 sudo ./helper/install.sh
+sudo ./helper/services/install.sh
 
 # Reboot
 echo "Please reboot with: 'sudo shutdown -r now'"

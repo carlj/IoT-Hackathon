@@ -1,4 +1,5 @@
 #!/bin/bash
+cd "$(dirname "$0")"
 
 # Install general packages
 sudo pip install RPi.GPIO

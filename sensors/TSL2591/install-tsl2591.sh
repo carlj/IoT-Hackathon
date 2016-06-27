@@ -1,4 +1,5 @@
 #!/bin/bash
+cd "$(dirname "$0")"
 
 # Install he needed CFFI dependency
 sudo apt-get install libffi-dev

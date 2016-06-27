@@ -1,4 +1,5 @@
 #!/bin/bash
+cd "$(dirname "$0")"
 
 sudo apt-get install git build-essential python-dev
 

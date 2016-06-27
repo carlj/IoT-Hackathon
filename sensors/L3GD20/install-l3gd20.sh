@@ -1,4 +1,5 @@
 #!/bin/bash
+cd "$(dirname "$0")"
 
 # Install the GPIO dependencies
 sudo pip install Adafruit-GPIO
