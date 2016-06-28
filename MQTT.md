@@ -43,8 +43,8 @@ channel.start_consuming()
 ## Exchange and Topics/Routing Keys
 * Default Exchange: ```iot_hackathon```
 * Topics:
-  * ```dht22``
-  * ```tsl2591``
-  * ```l3gd20``
+  * ```dht22```
+  * ```tsl2591```
+  * ```l3gd20```
   * ```lsm303```
-  * ```mtk3339`` : Note the GPS Sensor isnt by default connected to the raspberrypi
+  * ```mtk3339``` : Note the GPS Sensor isnt by default connected to the raspberrypi
