@@ -1,4 +1,4 @@
-# MQTT - IoT Raspberry PI Documentation
+# Sensors - IoT Raspberry PI Documentation
 
 ## Usage
 
