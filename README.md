@@ -9,7 +9,7 @@ There are three different ways to connect to the Raspberry PI:
 
 **Graphic**: You can directly connect the Raspberry Pi to a HDMI display, Keyboard and Mouse.
 
-**SSH**: On every raspberry pi there is a ssh server running. To connect to the rasberrypi just try to run the command ```ssh pi@IP-FOR-YOU-RASPBERRY``` or ```ssh pi@NAME-OF-YOUR-RASPBERRY``` e.g. ```ssh pi@raspberrypi09```. The user is ```pi``` and the password is ```raspberry```.
+**SSH**: On every raspberry pi there is a ssh server running. To connect to the rasberrypi just try to run the command ```ssh pi@IP-FOR-YOU-RASPBERRY``` or ```ssh pi@NAME-OF-YOUR-RASPBERRY``` e.g. ```ssh pi@raspberrypi9```. The user is ```pi``` and the password is ```raspberry```.
 
 **Console Cable**:
 If you want to connect via a Console Cable you need to install the following driver for the **PL2303** USB to TTL Chipset on you local machine: http://www.prolific.com.tw/US/ShowProduct.aspx?pcid=41&showlevel=0041-0041.
@@ -23,7 +23,7 @@ You also need to connect the black, green and white cable with the raspberry as 
 
 For further information you can check out the tutorial from Adafruit: https://learn.adafruit.com/adafruits-raspberry-pi-lesson-5-using-a-console-cable/overview
 
-If everything up and running you need to enable the i2c ports and install the GPIO Python library.
+If everything is up and running you can check out the python script for the sensors. 
 
 ## Sensor's
 With the current setup we provided a bunch of sensor's:

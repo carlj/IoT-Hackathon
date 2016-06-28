@@ -2,14 +2,14 @@
 On each of the raspberry pi there is a [RabbitMQ Server](http://www.rabbitmq.com) up and running.
 
 ## Service
-To check out the status, restart or stop the mqtt service just use the service command:
+To check out the status, restart or stop the mqtt server just use the service command:
 ```sudo service rabbitmq-server start|stop|status|restart}```
 
 ## Connect
 The MQTT Server is listening on the port ```5672```.
 There are a examples to recieve data from the sensors in the ```/home/pi/IoT-Hackathon/helper/sensor-mqtt-reciever``` folder.
 
-The default exchange name is ```iot_hackathon``` and you can use the name of the sensor as the routingkey (e.g. "dht22", "tsl2591")
+The default exchange name is ```iot_hackathon``` and you can use the name of the sensor as the routingkey (e.g. "dht22", "tsl2591" or "#" as a wildcard)
 
 A basic python script to recieve message from the RabbitMQ server could be as following:
 ```
@@ -41,10 +41,10 @@ channel.start_consuming()
 ```
 
 ## Exchange and Topics/Routing Keys
-* Default Exchange: ```iot-hackathon```
+* Default Exchange: ```iot_hackathon```
 * Topics:
   * ```dht22``
   * ```tsl2591``
   * ```l3gd20``
   * ```lsm303```
-  * ```mtk3339`` : Note the GPS Sensor inst by default connected to the raspberrypi
+  * ```mtk3339`` : Note the GPS Sensor isnt by default connected to the raspberrypi
