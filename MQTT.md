@@ -47,4 +47,4 @@ channel.start_consuming()
   * ```tsl2591```
   * ```l3gd20```
   * ```lsm303```
-  * ```mtk3339``` : Note the GPS Sensor isnt by default connected to the raspberrypi
+  * ```mtk3339``` : Note the GPS Sensor isnt by default connected to the raspberrypi. To connect the GPS Sensor read the [GPS Docu](sensors/MTK3339/README.md)
