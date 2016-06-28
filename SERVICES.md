@@ -17,14 +17,14 @@
 For each of the sensors there are already the ```socker``` and the ```mqtt```scripts implemented. The sources are located in the ```/home/pi/IoT-Hackathon/helper``` folder.
 
 
-* library: This is the IoT-Hackathon Python Library that is used in all of the following examples. You dont need to touch anything in there.
-* rabbitmq: The rabbitmq folder for the configuration files. You also dont need to touch anything in there.
-* sensor-socket-provide: There are the python scripts to read data from the sensor and publish the data to a ```local socket``` in the ```/tmp/``` folder
-* sensor-socket-recieve: Here are the scripts to recieve data from the ```local socket```
-* sensor-mqtt-provide: In this folder are the scripts located to publish the sensor data from the local socket to the ```mqtt server```
-* sensor-mqtt-reciever: Here are the script to recieve data from the ```mqtt server```
-* sensor-test: Included is just a test script for checking if all of the sensors are working correctly.
-* services: Here are the .service files located for the socket and mqtt scripts. You dont need to touch anything here
+* **library**: This is the IoT-Hackathon Python Library that is used in all of the following examples. You dont need to touch anything in there.
+* **rabbitmq**: The rabbitmq folder for the configuration files. You also dont need to touch anything in there.
+* **sensor-socket-provide**: There are the python scripts to read data from the sensor and publish the data to a ```local socket``` in the ```/tmp/``` folder
+* **sensor-socket-recieve**: Here are the scripts to recieve data from the ```local socket```
+* **sensor-mqtt-provide**: In this folder are the scripts located to publish the sensor data from the local socket to the ```mqtt server```
+* **sensor-mqtt-reciever**: Here are the script to recieve data from the ```mqtt server```
+* **sensor-test**: Included is just a test script for checking if all of the sensors are working correctly.
+* **services**: Here are the .service files located for the socket and mqtt scripts. You dont need to touch anything here
 
 ## Services
 As mentiod above there are services for each sensor to publish data to the ```local socket``` or the ```mqtt server```.
