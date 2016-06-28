@@ -11,7 +11,7 @@ if __name__ == '__main__':
     if len(sys.argv) >= 2:
         socket = sys.argv[1]
     else:
-        print "You need to provide the sensor socket (/tmp/dht22, /tmp/lsm303, /tmp/tsl2591, /tmp/mtk3399 or /tmp/l3gd20) as a parameter"
+        print "You need to provide the sensor socket (/tmp/dht22, /tmp/lsm303, /tmp/tsl2591, /tmp/mtk3399 or /tmp/l3gd20) as a parameter e.g. (sudo python socket_recieve.py '/tmp/dht22')"
         exit(-1)
 
 

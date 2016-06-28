@@ -37,14 +37,4 @@ With the current setup we provided a bunch of sensor's:
 * [L3GD20 / LSM303](https://www.adafruit.com/products/1714): This inertial-measurement-unit combines 2 of the best quality sensors available on the market to give you 9 axes of data: **3 axes of accelerometer data, 3 axes gyroscopic, and 3 axes magnetic (compass)**.
 
 ### Using the Sensor's
-There are a few different way's to interact with the sensors.
-
-***Locally***:
-* **Do it by yourself**: If you are happy and a crazy nerd you can do everything by yourself. The sensors are already connected to the Raspberry PI's GPIO or i2c ports and feel free to develop in any language you would like.
-* **Example Python Scripts**: In the ```/home/pi/IoT-Hackathon/sensors``` directory are folders for every sensor. You can check out in the specific example folder (e.g ```/home/pi/IoT-Hackathon/sensors/dht22/example```) some of python scripts to work with the sensor data and get an idea how to interact with the data itself.
-* **Local Server**: For each of the sensor there is a local [unix domain socket server](https://en.wikipedia.org/wiki/Unix_domain_socket) running. You can connect **only locally** to the server by connecting to the socket for the sensor (e.g ```/tmp/dht22```). There is also a client example for the sensors in the ```/home/pi/IoT-Hackathon/helper/sensor-socket-recieve``` directory.
-
-**Note**: For the Remote solution, mentioned below, we are also using the local unix domain socket server. The advantage of this behaviour is that you dont need that start the scripts for every sensor by your self.
-
-***Remote:***
-* **MQTT**: If you want to request the sensor data from a remote device directly from the Raspberry PI there is a [RabbitMQ](http://www.rabbitmq.com) server that supports [amqp](https://en.wikipedia.org/wiki/Advanced_Message_Queuing_Protocol) up and running. With this service you have the ability to get real time data from the sensors without develop something on the raspberry itself. For further Information check out the [MQTT Documentation](mqtt.md)
+There are a few different way's to interact with the sensors. For further Information check out the [Service Docu](SERVICES.md)
